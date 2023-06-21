@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "write a commit"
+read var
+echo "choose the file that you want to push"
+read  var2
+
+git add ${var}
+git commit -m ${var}
+git push
