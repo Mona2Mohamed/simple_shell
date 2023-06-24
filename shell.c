@@ -23,7 +23,7 @@ int main(int argCount ,char **argArray)
 	while (getlineReturn != -1)
 	{
 		for (i = 0; promptLine[i] != '\0'; i++)
-			putchar(promptLine[i]);
+			_putchar(promptLine[i]);
 		getlineReturn = getline(&argPtr, &argsize, stdin);
 		if (getlineReturn == -1)
 		{
@@ -35,7 +35,7 @@ int main(int argCount ,char **argArray)
 	{
 		return (-1);
 	}
-	strcpy(argPtr_cpy, argPtr);
+	_strcpy(argPtr_cpy, argPtr);
 	str_tkn = strtok(argPtr_cpy, delimiter);
 	while (str_tkn != NULL)
 	{
@@ -48,14 +48,14 @@ int main(int argCount ,char **argArray)
 	while (str_tkn != NULL)
 	{
 		int i = 0;
-		argArray[i] = malloc(sizeof(char) * strlen(str_tkn));
-		strcpy(argArray[i], str_tkn);
+		argArray[i] = malloc(sizeof(char) * _strlen(str_tkn));
+		_strcpy(argArray[i], str_tkn);
 		str_tkn = strtok(NULL, delimiter);
 		i++;
 	}
 	argArray[i] = NULL;
 	for (i = 0; argPtr[i] != '\0' ; i++)
-		putchar(argPtr[i]);
+		_putchar(argPtr[i]);
 	free(argPtr);
 	return (0);
 }
