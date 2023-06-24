@@ -54,8 +54,10 @@ int main(int argCount ,char **argArray)
 		i++;
 	}
 	argArray[i] = NULL;
+	execute_cmd(argArray);
 	for (i = 0; argPtr[i] != '\0' ; i++)
 		_putchar(argPtr[i]);
 	free(argPtr);
+	free(argPtr_cpy);
 	return (0);
 }
