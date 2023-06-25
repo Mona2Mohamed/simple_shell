@@ -1,17 +1,28 @@
 #include "shell.h"
 #include <stdio.h>
+#include <sys/wait.h>
+
 /**
  * execute_cmd - function handles commands
- * @argArray: argument command
+ * @argv: argument command
  */
-void execute_cmd(char **argArray)
+int execute_cmd(char **argv)
 {
-	char *commandLine = NULL;
-	
-	if (argArray)
-	{
-		commandLine = argArray[0];
-		if (execve(commandLine, argArray, NULL) == -1)
-			perror("Error:");
+        pid_t pid = fork();
+
+        if (pid == 0)
+        {
+                int exec_status = execve(argv[0], argv, NULL);
+                if (exec_status == -1)
+                {
+                        perror("Error: failed to execute command");
+                        exit(1);
+                }
         }
+        else
+        {
+                int status;
+                waitpid(pid, &status, 0);
+        }
+        return 0;
 }
