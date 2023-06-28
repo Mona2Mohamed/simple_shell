@@ -1,5 +1,4 @@
 #include "shell.h"
-#include <sys/stat.h>
 /**
  * get_loc - Get the length of the command given
  * @cmd: command
@@ -7,20 +6,19 @@
  */
 char *get_loc(char *cmd)
 {
-	char *path;
-	char *path_cpy;
-	char *path_tkn;
-	char *file_path;
+	char *path, *path_cpy, *path_tkn, *file_path;
 	int cmd_len;
 	int dir_len;
 	struct stat buffer;
 
 	path = getenv("PATH");
-	if (path != NULL)
+
+	if (path)
 	{
 		path_cpy = strdup(path);
 		cmd_len = strlen(cmd);
 		path_tkn = strtok(path_cpy, ":");
+
 		while (path_tkn != NULL)
 		{
 			dir_len = strlen(path_tkn);
@@ -41,6 +39,9 @@ char *get_loc(char *cmd)
 			}
 		}
 		free(path_cpy);
+		if (stat(cmd, &buffer) == 0)
+			return (cmd);
+		return (NULL);
 	}
 	return (NULL);
 }
