@@ -1,1 +1,1 @@
-this is simple shell project with my peer
+README FILE SIMPLE_SHELL_PROJECT
